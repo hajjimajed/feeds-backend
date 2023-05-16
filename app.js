@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const multer = require('multer');
 
-const MONGODB_URI = 'mongodb+srv://hajjimajed78:rHh6z3McFzWLIPbK@cluster0.xh4x4zf.mongodb.net/feeds?retryWrites=true&w=majority';
+require('dotenv').config();
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth')
