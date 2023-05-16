@@ -18,10 +18,12 @@ const userSchema = new Schema({
         type: String,
         default: 'New User'
     },
-    posts: {
-        type: Schema.Types.ObjectId,
-        ref: 'Post'
-    }
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ]
 }
 )
 
