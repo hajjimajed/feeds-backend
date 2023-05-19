@@ -75,3 +75,30 @@ exports.login = (req, res, next) => {
             next(err);
         })
 }
+
+
+exports.getData = (req, res, next) => {
+    // Assuming you have the userId available from the request or the authentication process
+    const userId = req.userId;
+
+    // Find the user by their userId in the database
+    User.findById(userId)
+        .then(user => {
+            if (!user) {
+                // User not found
+                const error = new Error('User not found');
+                error.statusCode = 404;
+                throw error;
+            }
+
+            // User found, return the user data
+            res.status(200).json({ message: 'User data retrieved', user: user });
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        });
+};
+

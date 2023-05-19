@@ -6,6 +6,8 @@ const authController = require('../controllers/auth');
 
 const User = require('../models/user');
 
+const isAuth = require('../middleware/is-auth')
+
 const router = express.Router();
 
 router.put('/signup', [
@@ -27,6 +29,8 @@ router.put('/signup', [
     authController.signup);
 
 router.post('/login', authController.login)
+
+router.get('/user-data', isAuth, authController.getData)
 
 
 module.exports = router;
