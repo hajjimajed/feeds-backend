@@ -13,15 +13,26 @@ exports.signup = (req, res, next) => {
         throw error;
     }
 
+    if (!req.file) {
+        const error = new Error('No image provided');
+        error.statusCode = 422;
+        throw error;
+    }
+
     const email = req.body.email;
     const name = req.body.name;
+    const nickname = req.body.nickname
     const password = req.body.password;
+    const imageUrl = req.file.path;
+
     bcrypt.hash(password, 12)
         .then(hashedPassword => {
             const user = new User({
                 email: email,
                 password: hashedPassword,
-                name: name
+                name: name,
+                nickname: nickname,
+                profileImg: imageUrl
             })
             return user.save();
         })

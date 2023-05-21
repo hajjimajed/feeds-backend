@@ -14,6 +14,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    nickname: {
+        type: String,
+        required: true
+    },
+    profileImg: {
+        type: String,
+        required: true
+    },
     status: {
         type: String,
         default: 'New User'
