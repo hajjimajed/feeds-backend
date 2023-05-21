@@ -28,6 +28,16 @@ router.put('/signup', [
 ],
     authController.signup);
 
+router.put('/user-data', isAuth, [
+    body('email')
+        .isEmail()
+        .withMessage('Please enter a valid email')
+        .normalizeEmail(),
+    body('name').trim().not().isEmpty(),
+    body('nickname').trim().not().isEmpty()
+], authController.updateUserData);
+
+
 router.post('/login', authController.login)
 
 router.get('/user-data', isAuth, authController.getData)
